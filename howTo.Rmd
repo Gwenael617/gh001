@@ -5,37 +5,73 @@ date: "13 October 2015"
 output: html_document
 ---
 
-This is a test to deploy gh-branch
+<br><br>
+This is a test to deploy gh-pages
 
+<br><br>  
+
+## Simplified method :  
+
+1. Create a repo on github, initialized it with a README.md and clone it to your local  
+2. Encode your .Rmd file in UTF-8  
+3. knit your html file, and if they were not yet in the repo, 
+move those two files to your local repo.  
+4. if your report is not called index.html but has a meaningful name, include an extra 
+index.html file in the local repo :  
+
+```{r index.html, eval=FALSE}
+<!DOCTYPE HTML>  
+<html>  
+  <head>  
+      <title>Title of the project</title>  
+	 </head>  
+	 <body>  
+	    <p>please go <a href="http://YOURNAME.github.io/YOURREPO/YOURREPORT.html">here</a> to read the report.</p>  
+	 </body>  
+</html>  
+```
+
+YOURNAME should be the user name you have on github.  
+YOURREPO should be the name of the repo.  
+YOURREPORT should be the name of your report.  
+
+5. update the README.md  
+6. you do not need to include your knitr cache to the commit.  
+7. avoid too fancy css or adding image not created by knitr if you want to use this method  
+8. push everything to github  
+git add -A / git commit -m "your message" / git push origin master  
+
+9. create the gh-pages in the simplest possible way  
+
+on your repo page (the main page of this repo, where the README is read), 
+just under the orange bar, find the branch button. 
+Click the down arrow to show the list of branches.   
+
+There is probably just master and a box that says search or add branches. 
+Go in the box and type gh-pages  
+then add/create this branch  
+
+Now wait it can take a few minutes to compile.   
+
+Then go to this address (make the obvious changes before, as per the above indications) :   http://YOURNAME.github.io/YOURREPO/YOURREPORT.html  
+
+If the name of either YOURNAME, YOURREPO, or YOURREPORT 
+contain upper and lower cases, respect that.  
+
+You should see your html page displayed nicely on the web.   
+
+<br>  
+
+## Examples of R code chunks :  
 
 ```{r}
 summary(cars)
 ```
 
-and with plots, for example:
+and with plots, for example:  
 
 ```{r, echo=FALSE}
 plot(cars)
 ```
 
-title: "howTo"
-author: "Gwenaël Gouérou"
-date: "13 October 2015"
-output: html_document
----
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-summary(cars)
-```
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+END  
