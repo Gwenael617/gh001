@@ -2,7 +2,9 @@
 title: "howTo"
 author: "Gwenaël Gouérou"
 date: "13 October 2015"
-output: html_document
+output: 
+    html_document:
+        toc: TRUE
 ---
 
 <br><br>
@@ -62,16 +64,102 @@ You should see your html page displayed nicely on the web.
 
 <br>  
 
-## Examples of R code chunks :  
+## to pull the gh-pages into your local  
 
-```{r}
-summary(cars)
+```{r, eval=FALSE}
+git pull origin gh-pages
 ```
 
-and with plots, for example:  
+## alternative version of point 9 : create the gh-pages from git  
 
-```{r, echo=FALSE}
-plot(cars)
+Everything written above in points 1 to 8 still apply, 
+this is an alternate version for point 9 only.  
+
+you need to be in the repo you've created and cloned in your local.  
+
+create the gh-pages :
+```{r eval=FALSE}
+git checkout -b gh-pages
 ```
+
+push to gihtub :
+```{r eval=FALSE}
+git push origin gh-pages
+```
+
+switch back to master to continue working 
+(no "-b" this time as that was for making a new branch)
+```{r eval=FALSE}
+git checkout master
+```
+
+<br>  
+
+## Now to make some changes !!!
+
+verify which branch you're in
+```{r eval=FALSE}
+git branch -v
+```
+
+You can decide to make changes first in either the master branch or gh-pages branch. 
+That's fine, just be careful to make all the changes first in one branch before 
+merging them. 
+
+you made some changes in the repo. 
+Note that you're not going to see the branches in the physical folder. 
+Remember this is version control. In your physical folder you'll only 
+see the latest file, in version control you can see earlier version.  
+
+Let's assume you're working in the master branch.  
+
+```{r eval=FALSE}
+git status
+git add -A           ## or whichever method you prefer/need at this moment, it can be git add index.html
+git commit - m "message"
+``` 
+
+Then switch to the other branch, in this case gh-pages  
+```{r eval=FALSE}
+git checkout gh-pages
+```
+
+"pull" your changes from master  
+```{r eval=FALSE}
+git pull . master
+```
+
+the "." means your local repository (you could also "git merge master")  
+
+
+You can see the new commit with :  
+```{r eval=FALSE}
+git log
+```
+
+Then, before forgetting, switch back to your master branch, 
+so you can continue working and making even more changes  
+```{r eval=FALSE}
+git checkout master
+```
+
+Finally, push both branch to your github account :  
+
+```{r eval=FALSE}
+git push origin master
+git push origin gh-pages
+```
+
+You'll need to enter your credential in between the two commands 
+but you don't need to switch branch to push gh-pages.
+
+You can go on github,com to see the changes, and on github.io to see your html displayed.
+Note : you may need to wait a few minute for this one
+(YOURNAME.github.io/YOURREPO/YOURREPORT.html) to be updated.  
+
+For later usage, know that the gh-pages can be only a small piece of the master branch. 
+I mean they don't necessarily need to be identical in bigger projects.  
+
+<br>  
 
 END  
